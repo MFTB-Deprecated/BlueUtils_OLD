@@ -18,9 +18,9 @@ public class VoxelGeoUtils
 	{
 		if (edge1 && edge2)
 		{
-			return 0;
+			return 0.0F;
 		}
-		return 1.0F - ((edge1 ? 0.0F : 1.0F) + (edge2 ? 0.0F : 1.0F) + (corner ? 0.0F : 1.0F)) / 3.0F;
+		return ((edge1 ? 0.0F : 1.0F) + (edge2 ? 0.0F : 1.0F) + (corner ? 0.0F : 1.0F)) / 3.0F;
 	}
 	
 	public static int[][] getOccludingVoxels(EnumDir face, int vertex)
