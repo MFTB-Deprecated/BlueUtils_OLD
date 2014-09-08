@@ -1,5 +1,7 @@
 package net.turrem.utils.ao;
 
+import net.turrem.utils.geo.EnumDir;
+
 /**
  * AORay is a series of points on a 3D integer grid that form a line or ray. By checking for open voxels at these points, the occlusion of this ray can be calculated.
  */
@@ -93,6 +95,27 @@ public class AORay
 				this.points[i] = o;
 				i++;
 			}
+		}
+	}
+	
+	public float getMagnitude(EnumDir dir)
+	{
+		switch (dir)
+		{
+			case XUp:
+				return this.xu;
+			case XDown:
+				return this.xd;
+			case YUp:
+				return this.yu;
+			case YDown:
+				return this.yd;
+			case ZUp:
+				return this.zu;
+			case ZDown:
+				return this.zd;
+			default:
+				return 0.0F;
 		}
 	}
 }
