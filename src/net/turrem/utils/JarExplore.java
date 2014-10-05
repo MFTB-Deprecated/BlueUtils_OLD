@@ -58,7 +58,7 @@ public class JarExplore
 		return null;
 	}
 
-	public ArrayList<Class<?>> getLoadedClasses()
+	public ArrayList<Class<?>> getLoadedClasses(ClassLoader cl)
 	{
 		ArrayList<Class<?>> classes = new ArrayList<Class<?>>();
 		ArrayList<String> classNames = this.getClassNames();
@@ -71,7 +71,7 @@ public class JarExplore
 			Class<?> clss = null;
 			try
 			{
-				clss = Class.forName(clsn);
+				clss = Class.forName(clsn, false, cl);
 			}
 			catch (ClassNotFoundException e)
 			{
