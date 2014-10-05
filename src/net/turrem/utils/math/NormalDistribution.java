@@ -2,8 +2,8 @@ package net.turrem.utils.math;
 
 public class NormalDistribution implements Distribution
 {	
-	public final double mean;
-	public final double deviation;
+	public double mean;
+	public double deviation;
 	
 	public NormalDistribution(double mean, double deviation)
 	{
@@ -31,5 +31,25 @@ public class NormalDistribution implements Distribution
 	private double getStandardX(double x)
 	{
 		return (x - this.mean) / this.deviation;
+	}
+	
+	public double cumulativeRange(double min, double max)
+	{
+		return BlueMath.standardNormalCumulativeRange(min, max);
+	}
+	
+	public double cumulativeInRange(double min, double max, double x)
+	{
+		return BlueMath.standardNormalCumulativeInRange(min, max, x);
+	}
+	
+	public double cumulativeRange(double min, double max, int n)
+	{
+		return BlueMath.standardNormalCumulativeRange(min, max, n);
+	}
+	
+	public double cumulativeInRange(double min, double max, double x, int n)
+	{
+		return BlueMath.standardNormalCumulativeInRange(min, max, x, n);
 	}
 }

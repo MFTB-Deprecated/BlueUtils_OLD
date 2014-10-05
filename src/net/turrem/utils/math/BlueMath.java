@@ -16,8 +16,6 @@ public class BlueMath
 
 	/**
 	 * Calculates the cumulative distribution function (CDF) of the standard normal distribution using a Taylor series.
-	 * <p>
-	 * Accurate to <code>log(3*5*7...(2n+1))+x^2/2*log(e)+1/2*log(2*pi)-(2n+1)*log(x)</code> decimal places.
 	 * @param x The top of the interval
 	 * @param n How many iterations to make the calculation with
 	 * @return The cumulative distribution function of x
@@ -42,13 +40,33 @@ public class BlueMath
 	
 	/**
 	 * Calculates the cumulative distribution function (CDF) of the standard normal distribution using a Taylor series.
-	 * <p>
-	 * Accurate to <code>5.53+x^2*0.22-13*log(x)</code> decimal places.
 	 * @param x The top of the interval
 	 * @return The cumulative distribution function of x
 	 */
 	public static double standardNormalCumulative(double x)
 	{
 		return standardNormalCumulative(x, 6);
+	}
+	
+	public static double standardNormalCumulativeRange(double min, double max)
+	{
+		return standardNormalCumulative(max) - standardNormalCumulative(min);
+	}
+	
+	public static double standardNormalCumulativeRange(double min, double max, int n)
+	{
+		return standardNormalCumulative(max, n) - standardNormalCumulative(min, n);
+	}
+	
+	public static double standardNormalCumulativeInRange(double min, double max, double x)
+	{
+		double cmin = standardNormalCumulative(min);
+		return (standardNormalCumulative(x) - cmin) / (standardNormalCumulative(max) - cmin);
+	}
+	
+	public static double standardNormalCumulativeInRange(double min, double max, double x, int n)
+	{
+		double cmin = standardNormalCumulative(min, n);
+		return (standardNormalCumulative(x, n) - cmin) / (standardNormalCumulative(max, n) - cmin);
 	}
 }
