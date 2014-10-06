@@ -23,11 +23,22 @@ public class NormalDistribution implements Distribution
 		return BlueMath.standardNormalCumulative(this.getStandardX(x));
 	}
 
+	/**
+	 * Gets the mean of this distribution excluding all values lower than left.
+	 * @param left The lowest value to include in the mean
+	 * @return The mean
+	 */
 	public double sliceMean(double left)
 	{
 		return this.sliceMean(left, 6);
 	}
 	
+	/**
+	 * Gets the mean of this distribution excluding all values lower than left.
+	 * @param left The lowest value to include in the mean
+	 * @param n How many iterations to make the calculation with
+	 * @return The mean
+	 */
 	public double sliceMean(double left, int n)
 	{
 		//Don't even try to figure this out
@@ -55,28 +66,61 @@ public class NormalDistribution implements Distribution
 		return BlueMath.standardNormalCumulative(this.getStandardX(x), n);
 	}
 
+	/**
+	 * Scales and translates a value on this distribution to match the standard distribution.
+	 * @param x The value to scale
+	 * @return The z-score of the value
+	 */
 	private double getStandardX(double x)
 	{
 		return (x - this.mean) / this.deviation;
 	}
 
+	/**
+	 * Gets the fraction of the standard distribution that is in the given range.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @return The cumulative probability of the range
+	 */
 	public double cumulativeRange(double min, double max)
 	{
-		return BlueMath.standardNormalCumulativeRange(min, max);
+		return BlueMath.standardNormalCumulativeRange(this.getStandardX(min), this.getStandardX(max));
 	}
 
+	/**
+	 * Gets the fraction of the given range that is less than the given value.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @param x The value to compare
+	 * @return The fraction of the cumulative probability of the range lower than x
+	 */
 	public double cumulativeInRange(double min, double max, double x)
 	{
-		return BlueMath.standardNormalCumulativeInRange(min, max, x);
+		return BlueMath.standardNormalCumulativeInRange(this.getStandardX(min), this.getStandardX(max), this.getStandardX(x));
 	}
 
+	/**
+	 * Gets the fraction of the standard distribution that is in the given range.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @param n How many iterations to make the calculation with
+	 * @return The cumulative probability of the range
+	 */
 	public double cumulativeRange(double min, double max, int n)
 	{
-		return BlueMath.standardNormalCumulativeRange(min, max, n);
+		return BlueMath.standardNormalCumulativeRange(this.getStandardX(min), this.getStandardX(max), n);
 	}
 
+	/**
+	 * Gets the fraction of the given range that is less than the given value.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @param x The value to compare
+	 * @param n How many iterations to make the calculation with
+	 * @return The fraction of the cumulative probability of the range lower than x
+	 */
 	public double cumulativeInRange(double min, double max, double x, int n)
 	{
-		return BlueMath.standardNormalCumulativeInRange(min, max, x, n);
+		return BlueMath.standardNormalCumulativeInRange(this.getStandardX(min), this.getStandardX(max), this.getStandardX(x), n);
 	}
 }

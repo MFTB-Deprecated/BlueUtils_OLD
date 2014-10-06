@@ -8,8 +8,8 @@ public class BlueMath
 	static final double sqrtTwoPi = sqrtTwo * sqrtPi;
 	
 	/**
-	 * Calculates the probability density of standard normal distribution at x.
-	 * @param x The top of the interval
+	 * Calculates the probability density (PDF) of the standard normal distribution at x.
+	 * @param x The value to get the probability of
 	 * @return The standard normal distribution function of x
 	 */
 	public static double standardNormalProbability(double x)
@@ -41,6 +41,12 @@ public class BlueMath
 		return sum + 0.5D;
 	}
 	
+	/**
+	 * Computes the error function of the given value.
+	 * @param x The value
+	 * @param n How many iterations to make the calculation with
+	 * @return The error function of x
+	 */
 	public static double errorFunction(double x, int n)
 	{
 		double xs = x * x;
@@ -65,6 +71,11 @@ public class BlueMath
 		return sum * (2 / sqrtPi);
 	}
 	
+	/**
+	 * Computes the error function of the given value.
+	 * @param x The value
+	 * @return The error function of x
+	 */
 	public static double errorFunction(double x)
 	{
 		return errorFunction(x, 6);
@@ -80,22 +91,50 @@ public class BlueMath
 		return standardNormalCumulative(x, 6);
 	}
 	
+	/**
+	 * Gets the fraction of the standard distribution that is in the given range.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @return The cumulative probability of the range
+	 */
 	public static double standardNormalCumulativeRange(double min, double max)
 	{
 		return standardNormalCumulative(max) - standardNormalCumulative(min);
 	}
 	
+	/**
+	 * Gets the fraction of the standard distribution that is in the given range.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @param n How many iterations to make the calculation with
+	 * @return The cumulative probability of the range
+	 */
 	public static double standardNormalCumulativeRange(double min, double max, int n)
 	{
 		return standardNormalCumulative(max, n) - standardNormalCumulative(min, n);
 	}
 	
+	/**
+	 * Gets the fraction of the given range that is less than the given value.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @param x The value to compare
+	 * @return The fraction of the cumulative probability of the range lower than x
+	 */
 	public static double standardNormalCumulativeInRange(double min, double max, double x)
 	{
 		double cmin = standardNormalCumulative(min);
 		return (standardNormalCumulative(x) - cmin) / (standardNormalCumulative(max) - cmin);
 	}
 	
+	/**
+	 * Gets the fraction of the given range that is less than the given value.
+	 * @param min The bottom of the range
+	 * @param max The top of the range
+	 * @param x The value to compare
+	 * @param n How many iterations to make the calculation with
+	 * @return The fraction of the cumulative probability of the range lower than x
+	 */
 	public static double standardNormalCumulativeInRange(double min, double max, double x, int n)
 	{
 		double cmin = standardNormalCumulative(min, n);
