@@ -2,7 +2,10 @@ package net.turrem.utils.math;
 
 public class BlueMath
 {	
-	static final double sqrtTwoPi = Math.sqrt(2.0D * Math.PI);
+	static final double sqrtTwo = Math.sqrt(2.0D);
+	static final double sqrtPi = Math.sqrt(Math.PI);
+	static final double sqrtTwoOverPi = sqrtTwo / sqrtPi;
+	static final double sqrtTwoPi = sqrtTwo * sqrtPi;
 	
 	/**
 	 * Calculates the probability density of standard normal distribution at x.
@@ -36,6 +39,35 @@ public class BlueMath
 		sum /= sqrtTwoPi;
 		sum *= Math.exp(-0.5D * xs);
 		return sum + 0.5D;
+	}
+	
+	public static double errorFunction(double x, int n)
+	{
+		double xs = x * x;
+		int fact = 1;
+		int div = 1;
+		double sum = x;
+		double part = x;
+		for (int i = 1; i < n; i++)
+		{
+			fact *= i;
+			div += 2;
+			part *= xs;
+			if (i % 2 == 0)
+			{
+				sum += part / (div * fact);
+			}
+			else
+			{
+				sum -= part / (div * fact);
+			}
+		}
+		return sum * (2 / sqrtPi);
+	}
+	
+	public static double errorFunction(double x)
+	{
+		return errorFunction(x, 6);
 	}
 	
 	/**
